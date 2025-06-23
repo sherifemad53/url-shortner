@@ -28,6 +28,8 @@ jobs:
                   docker build -t ghcr.io/${{ github.repository }}:latest .
                   docker push ghcr.io/${{ github.repository }}:latest
 
-            - name: Deploy to Kubernetes (kind/minikube)
-              run: |
-                  kubectl apply -f kubernetes/
+            # - name: Deploy to Kubernetes (kind/minikube)
+            #   run: |
+            #       kubectl apply -f kubernetes/
+
+            # - name : use terraform to deploy
