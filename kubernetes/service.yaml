@@ -6,10 +6,12 @@ metadata:
 spec:
   selector:
     name: url-shortner
-
+  type: LoadBalancer
   ports:
-    - protocol: TCP
+    - name: http
+      protocol: TCP
       port: 80
       targetPort: 5000
+      nodePort: 30222   
 
   
