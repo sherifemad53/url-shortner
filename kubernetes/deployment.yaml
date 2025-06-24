@@ -16,6 +16,6 @@ spec:
       spec:
         containers:
           - name: url-shortner
-            image: ghcr.io/sherifemad53/url_shortner:latest
+            image: ghcr.io/sherifemad53/url-shortner:latest
             ports:
               - containerPort: 5000
