@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, redirect
+from flask import Flask, request, jsonify, redirect, render_template
 import hashlib
 
 app = Flask(__name__)
@@ -6,6 +6,10 @@ short_to_url = {}
 
 def generate_short_code(url):
     return hashlib.md5(url.encode()).hexdigest()[:6]
+
+@app.route('/')
+def index():
+    return render_template("index.html")
 
 @app.route('/shorten', methods=['POST'])
 def shorten():
@@ -30,10 +34,6 @@ def redirect_short_url(short_code):
         return redirect(original_url)
     else:
         return jsonify({"error": "URL not found"}), 404
-
-@app.route('/')
-def index():
-    return "Simple URL Shortener is running!"
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

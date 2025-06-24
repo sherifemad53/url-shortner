@@ -21,7 +21,6 @@ resource "kubernetes_deployment" "url_shortner" {
 
   spec {
     replicas = 2
-
     selector {
       match_labels = {
         app = "url_shortner"
