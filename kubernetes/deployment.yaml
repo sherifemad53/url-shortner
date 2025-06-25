@@ -3,19 +3,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
     name: url-shortner-deployment
-    namespace: url-shortner-ns
+    # namespace: url-shortner-ns
 spec:
     replicas: 2
     selector:
         matchLabels:
             app: url-shortner
     template:
-      metadata:
-        labels:
-          app: url-shortner
-      spec:
-        containers:
-          - name: url-shortner
-            image: ghcr.io/sherifemad53/url-shortner:latest
-            ports:
-              - containerPort: 5000
+        metadata:
+            labels:
+                app: url-shortner
+        spec:
+            containers:
+                - name: url-shortner
+                  image: ghcr.io/sherifemad53/url-shortner:latest
+                  imagePullPolicy: Always
+                  ports:
+                      - containerPort: 5000

@@ -7,37 +7,37 @@ terraform {
   }
 }
 
-resource "kubernetes_namespace" "url_shortner" {
+resource "kubernetes_namespace" "url-shortner" {
   metadata {
-    name = "url_shortner"
+    name = "url-shortner"
   }
 }
 
-resource "kubernetes_deployment" "url_shortner" {
+resource "kubernetes_deployment" "url-shortner" {
   metadata {
-    name = "url_shortner"
-    namespace = kubernetes_namespace.url_shortner.metadata[0].name
+    name = "url-shortner"
+    namespace = kubernetes_namespace.url-shortner.metadata[0].name
   }
 
   spec {
     replicas = 2
     selector {
       match_labels = {
-        app = "url_shortner"
+        app = "url-shortner"
       }
     }
 
     template {
       metadata {
         labels = {
-          app = "url_shortner"
+          app = "url-shortner"
         }
       }
 
       spec {
         container {
-          image = "ghcr.io/sherifemad53/url_shortner:latest"
-          name  = "url_shortner"
+          image = "ghcr.io/sherifemad53/url-shortner:latest"
+          name  = "url-shortner"
           port {
             container_port = 5000
           }
@@ -47,22 +47,23 @@ resource "kubernetes_deployment" "url_shortner" {
   }
 }
 
-resource "kubernetes_service" "url_shortner" {
+resource "kubernetes_service" "url-shortner" {
   metadata {
-    name      = "url_shortner"
-    namespace = kubernetes_namespace.url_shortner.metadata[0].name
+    name      = "url-shortner"
+    namespace = kubernetes_namespace.url-shortner.metadata[0].name
   }
 
   spec {
     selector = {
-      app = "url_shortner"
+      app = "url-shortner"
     }
 
+    
     port {
       port        = 80
       target_port = 5000
     }
 
-    type = "NodePort"
+    type = "LoadBalancer"
   }
 }
